@@ -317,7 +317,7 @@ export default function HomePage() {
                 title: "Cloud Architecture",
                 description:
                   "Scalable cloud infrastructure, microservices architecture, and DevOps solutions for modern enterprises.",
-                features: ["Auto-scaling", "Load Balancing", "CI/CD Pipelines", "Container Orchestration"],
+                features: ["Auto-scaling", "Load Balancing", "CI/CD Pipelines"],
                 gradient: "from-purple-500 to-pink-500",
                 tech: ["AWS", "Kubernetes", "Docker", "Terraform"],
                 image: CloudImg,
