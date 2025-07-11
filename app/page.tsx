@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {AIML,CloudImg,FullStackDev,AIBootcamp,CloudMastery,FullStackTrack} from "../public/ImageURI/CardImg"
 
 import PortfolioShowcase from './portfolio/page'
+import ContactForm from "./contact/page"
 import {
   ArrowRight,
   Star,
@@ -586,103 +583,9 @@ export default function HomePage() {
               turn your vision into reality.
             </p>
           </div>
-
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <Card className="border-0 shadow-2xl bg-card/80 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-3xl">Start Your Project</CardTitle>
-                <CardDescription className="text-lg">
-                  Tell us about your vision and we'll help you build it.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-8">
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName" className="text-sm font-medium">
-                        First Name
-                      </Label>
-                      <Input id="firstName" placeholder="John" className="h-12" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName" className="text-sm font-medium">
-                        Last Name
-                      </Label>
-                      <Input id="lastName" placeholder="Doe" className="h-12" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium">
-                      Email
-                    </Label>
-                    <Input id="email" type="email" placeholder="john@company.com" className="h-12" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="company" className="text-sm font-medium">
-                      Company
-                    </Label>
-                    <Input id="company" placeholder="Your Company" className="h-12" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="interest" className="text-sm font-medium">
-                      I'm interested in
-                    </Label>
-                    <Select>
-                      <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Select your interest" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="ai">AI/ML Development</SelectItem>
-                        <SelectItem value="cloud">Cloud Architecture</SelectItem>
-                        <SelectItem value="fullstack">Full-Stack Development</SelectItem>
-                        <SelectItem value="training">Training Programs</SelectItem>
-                        <SelectItem value="consulting">Technical Consulting</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="budget" className="text-sm font-medium">
-                      Project Budget
-                    </Label>
-                    <Select>
-                      <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Select budget range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-50k">Under $50,000</SelectItem>
-                        <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                        <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
-                        <SelectItem value="250k-500k">$250,000 - $500,000</SelectItem>
-                        <SelectItem value="over-500k">Over $500,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="text-sm font-medium">
-                      Project Details
-                    </Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us about your project requirements, timeline, and goals..."
-                      rows={6}
-                      className="resize-none"
-                    />
-                  </div>
-
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 h-14 text-lg">
-                    Send Message
-                    <Send className="ml-2 h-5 w-5" />
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            <ContactForm />
 
             {/* Contact Information */}
             <div className="space-y-10">
@@ -731,7 +634,6 @@ export default function HomePage() {
                   </Card>
                 ))}
               </div>
-
               <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/50 dark:to-purple-950/50">
                 <CardContent className="p-8">
                   <h3 className="font-semibold text-xl mb-4 flex items-center">
