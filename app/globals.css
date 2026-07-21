@@ -4,48 +4,38 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
-  }
+    /* Grentech brand tokens — dark-first, single theme */
+    --background: 165 42% 5%;
+    --surface: 160 39% 9%;
+    --surface-raised: 160 34% 12%;
+    --foreground: 140 30% 97%;
+    --muted-foreground: 150 12% 68%;
+    --border: 160 16% 20%;
+    --border-strong: 160 18% 28%;
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
+    --brand: 152 74% 58%;
+    --brand-foreground: 165 42% 5%;
+    --accent-lime: 73 90% 68%;
+    --teal: 165 37% 41%;
+    --amber: 38 90% 65%;
+    --coral: 5 82% 68%;
+
+    --card: var(--surface);
+    --card-foreground: var(--foreground);
+    --popover: 160 39% 8%;
+    --popover-foreground: var(--foreground);
+    --primary: var(--brand);
+    --primary-foreground: var(--brand-foreground);
+    --secondary: 160 25% 15%;
+    --secondary-foreground: var(--foreground);
+    --muted: 160 25% 13%;
+    --accent: 160 25% 15%;
+    --accent-foreground: var(--foreground);
+    --destructive: 5 82% 68%;
+    --destructive-foreground: 165 42% 5%;
+    --input: 160 25% 16%;
+    --ring: 152 74% 58%;
+    --radius: 0.875rem;
   }
 }
 
@@ -53,159 +43,130 @@
   * {
     @apply border-border;
   }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: radial-gradient(ellipse 80% 60% at 50% -10%, hsl(152 74% 20% / 0.35), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, hsl(165 37% 25% / 0.2), transparent);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: hsl(var(--brand) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--brand));
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 }
 
 @layer utilities {
-  .animate-fade-in-up {
-    animation: fadeInUp 1s ease-out forwards;
+  .text-balance {
+    text-wrap: balance;
   }
 
-  .animate-fade-in-right {
-    animation: fadeInRight 1s ease-out 0.3s forwards;
-    opacity: 0;
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .animate-bounce-slow {
-    animation: bounce 4s infinite;
+  .bg-grid {
+    background-image: linear-gradient(hsl(150 30% 90% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(150 30% 90% / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
   }
 
-  .animate-spin-slow {
-    animation: spin 30s linear infinite;
+  .glass-panel {
+    background: hsl(var(--surface) / 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border-strong));
   }
 
-  .animate-gradient {
-    background-size: 400% 400%;
-    animation: gradient 4s ease infinite;
+  .no-anim *,
+  .no-anim *::before,
+  .no-anim *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 
-  .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 100;
+    transition: top 0.15s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    transform: translateY(-14px) translateX(6px);
   }
 }
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
 
-/* Enhanced scrollbar */
+@keyframes pulse-node {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+.animate-pulse-node {
+  animation: pulse-node 3.2s ease-in-out infinite;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 ::-webkit-scrollbar-track {
-  @apply bg-muted/50;
+  background: hsl(var(--background));
 }
-
 ::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-b from-blue-500 to-purple-500 rounded-full;
+  background: hsl(var(--teal) / 0.5);
+  border-radius: 999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  @apply from-blue-600 to-purple-600;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom selection */
-::selection {
-  @apply bg-blue-500/20 text-blue-900 dark:text-blue-100;
-}
-
-/* Focus styles */
-:focus-visible {
-  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-background;
-}
-
-/* Glass morphism utility */
-.glass {
-  @apply bg-white/10 backdrop-blur-md border border-white/20;
-}
-
-.dark .glass {
-  @apply bg-black/10 backdrop-blur-md border border-white/10;
-}
-
-/* Tech grid background */
-.tech-grid {
-  background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-/* Floating animation */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Glow effect */
-.glow {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-}
-
-.dark .glow {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-}
-
-/* Dark mode specific improvements */
-.dark {
-  color-scheme: dark;
-}
-
-/* Ensure proper contrast in dark mode */
-.dark .bg-gradient-to-br {
-  @apply from-blue-950/20 via-background to-purple-950/20;
-}
-
-/* Theme transition */
-* {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
+  background: hsl(var(--brand) / 0.6);
 }
