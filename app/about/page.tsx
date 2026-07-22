@@ -1,10 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, Compass, Users2, Gauge, Wrench } from "lucide-react"
+import { ArrowRight, Compass, Users2, Gauge, Wrench, Sparkle } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import { PageHeader } from "@/components/sections/page-header"
+import { TopicVisual } from "@/components/three/topic-visual"
+import { TopicFallback } from "@/components/three/topic-fallback"
+import { AboutScene } from "@/components/three/scene-loaders"
 
 export const metadata: Metadata = {
   title: "About",
@@ -42,6 +45,7 @@ export default function AboutPage() {
         eyebrow="ABOUT GRENTECH"
         title="Software built around the way your business works."
         description="Grentech is a UK-based software product studio. We work with founders, operations leaders, and product teams to turn complex, manual workflows into software that people actually want to use."
+        visual={<TopicVisual Scene={AboutScene} fallback={<TopicFallback icon={Sparkle} color="brand" />} />}
       />
 
       <section className="py-16 sm:py-20">

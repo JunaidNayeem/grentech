@@ -1,11 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, RefreshCcw } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import { PageHeader } from "@/components/sections/page-header"
 import { ProcessTimeline } from "@/components/sections/process-timeline"
+import { TopicVisual } from "@/components/three/topic-visual"
+import { TopicFallback } from "@/components/three/topic-fallback"
+import { HowWeWorkScene } from "@/components/three/scene-loaders"
 
 export const metadata: Metadata = {
   title: "How we work",
@@ -47,6 +50,7 @@ export default function HowWeWorkPage() {
         eyebrow="HOW WE WORK"
         title="Built with you, not just for you."
         description="A structured, transparent delivery approach — from first conversation to a live product and everything after."
+        visual={<TopicVisual Scene={HowWeWorkScene} fallback={<TopicFallback icon={RefreshCcw} color="teal" />} />}
       />
 
       <ProcessTimeline />

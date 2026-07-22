@@ -142,6 +142,49 @@
   animation: float-slow 8s ease-in-out infinite;
 }
 
+@keyframes blob-drift-1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(4%, 6%) scale(1.1);
+  }
+  66% {
+    transform: translate(-3%, 3%) scale(0.95);
+  }
+}
+@keyframes blob-drift-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, -4%) scale(1.15);
+  }
+}
+.animate-blob-1 {
+  animation: blob-drift-1 16s ease-in-out infinite;
+}
+.animate-blob-2 {
+  animation: blob-drift-2 20s ease-in-out infinite;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee-scroll 28s linear infinite;
+}
+.animate-marquee-fast {
+  animation: marquee-scroll 16s linear infinite;
+}
+
 @keyframes pulse-node {
   0%,
   100% {

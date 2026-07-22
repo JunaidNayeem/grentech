@@ -1,11 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Layers } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import { PageHeader } from "@/components/sections/page-header"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { TopicVisual } from "@/components/three/topic-visual"
+import { TopicFallback } from "@/components/three/topic-fallback"
+import { ServicesScene } from "@/components/three/scene-loaders"
 import { services, engagementOptions, servicesFaq } from "@/data/services"
 
 export const metadata: Metadata = {
@@ -22,6 +25,7 @@ export default function ServicesPage() {
         eyebrow="SERVICES"
         title="From idea to dependable software."
         description="Whatever stage your product or platform is at, we bring product strategy, design, and engineering together under one roof."
+        visual={<TopicVisual Scene={ServicesScene} fallback={<TopicFallback icon={Layers} color="brand" />} />}
       />
 
       <section className="py-16 sm:py-20">

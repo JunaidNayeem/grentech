@@ -7,9 +7,10 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
   return (
     <Link
       href={`/work/${study.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/50 transition-colors hover:border-border-strong hover:bg-surface-raised"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/50 transition-all hover:-translate-y-1 hover:border-brand/40 hover:bg-surface-raised hover:shadow-[0_0_40px_-12px] hover:shadow-brand/40"
     >
       <div aria-hidden="true" className="relative h-40 overflow-hidden border-b border-border bg-grid p-5">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-teal/10 opacity-0 transition-opacity group-hover:opacity-100" />
         <div className="flex h-full flex-col justify-between">
           <div className="flex gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-coral/70" />
