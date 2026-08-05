@@ -1,5 +1,5 @@
 /**
- * JS-side mirrors of the CSS motion tokens in app/globals.css (--dur-*/--ease-*).
+ * JS-side mirrors of the CSS motion tokens in app/globals.css (--dur-* and --ease-*).
  * Framer Motion needs plain numbers/arrays, not CSS custom properties, so these
  * constants are the single place to keep the two in sync.
  */
