@@ -49,7 +49,11 @@ export function MaturityAssessment() {
     const band = getMaturityBand(score)
 
     return (
-      <div ref={resultsRef} tabIndex={-1} className="space-y-10 outline-none">
+      <div
+        ref={resultsRef}
+        tabIndex={-1}
+        className="space-y-10 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-brand"
+      >
         <div aria-live="polite">
           <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Your result</span>
           <h2 className="mt-2 font-display text-2xl font-semibold text-foreground sm:text-3xl">{band.title}</h2>

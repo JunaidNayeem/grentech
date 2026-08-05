@@ -89,7 +89,7 @@ export function Footer() {
             <Link href="/terms" className="hover:text-foreground">
               Terms
             </Link>
-            <span>© 2026 Grentech. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Grentech. All rights reserved.</span>
           </div>
         </div>
       </div>

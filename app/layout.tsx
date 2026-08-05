@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Plus_Jakarta_Sans, Inter, IBM_Plex_Mono } from "next/font/google"
 
 import { Header } from "@/components/layout/header"
@@ -45,6 +45,10 @@ export const metadata: Metadata = {
     title: "Grentech | SaaS Platforms, AI Workflows & Bespoke Software",
     description: SITE.description,
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: "hsl(162, 22%, 5%)",
 }
 
 const organizationJsonLd = {

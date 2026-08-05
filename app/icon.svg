@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="7" fill="hsl(162 22% 5%)" />
+  <rect x="4" y="4" width="10" height="10" rx="3" fill="hsl(152 74% 58%)" opacity="0.9" />
+  <rect x="18" y="4" width="10" height="10" rx="3" fill="hsl(165 37% 41%)" opacity="0.75" />
+  <rect x="4" y="18" width="10" height="10" rx="3" fill="hsl(165 37% 41%)" opacity="0.75" />
+  <rect x="18" y="18" width="10" height="10" rx="3" fill="hsl(152 74% 58%)" opacity="0.9" />
+  <path
+    d="M14 9H18M9 14V18M23 14V18M14 23H18"
+    stroke="hsl(73 90% 68%)"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    opacity="0.85"
+  />
+</svg>
