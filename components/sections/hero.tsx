@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, Gamepad2, Sparkles } from "lucide-react"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
 import { WebGLHero } from "@/components/three/webgl-hero"
@@ -14,10 +15,10 @@ export function Hero() {
       <GradientBlobs variant="hero" />
       <Container className="grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-2 lg:py-32">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-brand">
+          <Badge variant="brand" size="lg" className="border border-brand/30 gap-2">
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
             PRODUCT STUDIO · SAAS · AI WORKFLOWS
-          </span>
+          </Badge>
           <h1 className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
             Build software that{" "}
             <span className="bg-gradient-to-r from-brand via-lime to-teal bg-clip-text text-transparent">

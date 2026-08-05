@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card"
 import { SCORE_LABEL, calculateOverallScore, type ScoreKey } from "@/data/workflow-rescue"
 
 const BAR_COLOR: Record<ScoreKey, string> = {
@@ -11,7 +12,7 @@ export function ScorePanel({ scores }: { scores: Record<ScoreKey, number> }) {
   const keys = Object.keys(scores) as ScoreKey[]
 
   return (
-    <div className="rounded-2xl border border-border bg-surface/50 p-6">
+    <Card tone="neutral">
       <div className="flex items-baseline justify-between">
         <h2 className="font-display text-sm font-semibold text-foreground">Workflow health</h2>
         <span className="font-display text-2xl font-semibold text-brand">{overall}</span>
@@ -37,6 +38,6 @@ export function ScorePanel({ scores }: { scores: Record<ScoreKey, number> }) {
           </div>
         ))}
       </div>
-    </div>
+    </Card>
   )
 }

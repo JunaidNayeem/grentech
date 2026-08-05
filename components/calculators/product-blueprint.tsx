@@ -1,17 +1,22 @@
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+
 export function ProductBlueprint({ modules }: { modules: string[] }) {
   return (
-    <div aria-hidden="true" className="relative rounded-2xl border border-border bg-grid p-8">
+    <Card aria-hidden="true" tone="neutral" padding="lg" className="relative bg-grid">
       <div className="flex flex-wrap justify-center gap-3">
         {modules.map((module, index) => (
-          <div
+          <Badge
             key={module}
-            className="animate-float-slow rounded-xl border border-brand/30 bg-gradient-to-br from-brand/15 to-teal/5 px-4 py-3 text-center text-xs font-semibold text-foreground shadow-sm"
+            variant="brand"
+            size="lg"
+            className="animate-float-slow border border-brand/30 bg-gradient-to-br from-brand/15 to-teal/5 shadow-sm"
             style={{ animationDelay: `${index * 0.3}s` }}
           >
             {module}
-          </div>
+          </Badge>
         ))}
       </div>
-    </div>
+    </Card>
   )
 }

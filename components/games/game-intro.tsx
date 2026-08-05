@@ -1,8 +1,9 @@
+import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 export function GameIntro({ onStart }: { onStart: () => void }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface/50 p-8 sm:p-12">
+    <Card tone="neutral" padding="lg" className="p-8 sm:p-12">
       <span className="text-xs font-semibold uppercase tracking-wide text-brand">Monday, 09:00</span>
       <h2 className="mt-4 font-display text-2xl font-semibold text-foreground sm:text-3xl">
         Customer demand has doubled, but the team still runs on spreadsheets, inboxes, chat messages, and manual
@@ -22,6 +23,6 @@ export function GameIntro({ onStart }: { onStart: () => void }) {
           Start the week
         </Button>
       </div>
-    </div>
+    </Card>
   )
 }

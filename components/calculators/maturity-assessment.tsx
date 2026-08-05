@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { ArrowRight, Printer } from "lucide-react"
+import { AlertTriangle, ArrowRight, Printer } from "lucide-react"
 
 import { LikertScale } from "@/components/calculators/likert-scale"
 import { LeadCaptureForm } from "@/components/forms/lead-capture-form"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { maturityQuestions } from "@/data/workflow-maturity"
 import { calculateMaturityScore } from "@/lib/calculations"
 import { getMaturityBand } from "@/lib/recommendations"
@@ -59,7 +61,7 @@ export function MaturityAssessment() {
           <div className="h-full rounded-full bg-brand transition-all" style={{ width: `${score}%` }} />
         </div>
 
-        <div className="rounded-2xl border border-border bg-surface/40 p-6 sm:p-8">
+        <Card tone="neutral" padding="lg" className="sm:p-8">
           <h3 className="font-display text-lg font-semibold text-foreground">Practical recommendations</h3>
           <ul className="mt-4 space-y-3">
             {band.recommendations.map((item) => (
@@ -69,17 +71,20 @@ export function MaturityAssessment() {
               </li>
             ))}
           </ul>
-        </div>
+        </Card>
 
-        <div className="rounded-2xl border border-brand/30 bg-brand/[0.06] p-6 sm:p-8">
+        <Card tone="brand" padding="lg" className="sm:p-8">
           <span className="text-xs font-semibold uppercase tracking-wide text-brand">Suggested next step</span>
           <h3 className="mt-2 font-display text-xl font-semibold text-foreground">{band.engagement}</h3>
-        </div>
+        </Card>
 
-        <p className="rounded-xl border border-amber/30 bg-amber/[0.06] p-4 text-sm text-amber">
-          This is an indicative assessment, not a definitive diagnosis. It&rsquo;s designed to prompt useful conversation,
-          not replace a proper discovery process.
-        </p>
+        <Alert variant="warning">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>
+            This is an indicative assessment, not a definitive diagnosis. It&rsquo;s designed to prompt useful conversation,
+            not replace a proper discovery process.
+          </AlertDescription>
+        </Alert>
 
         <div className="flex flex-wrap gap-3 print:hidden">
           <Button asChild size="lg">

@@ -1,13 +1,15 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
+import { cardVariants } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 import type { Insight } from "@/data/insights"
 
 export function InsightCard({ insight }: { insight: Insight }) {
   return (
     <Link
       href={`/insights/${insight.slug}`}
-      className="group flex flex-col rounded-2xl border border-border bg-surface/50 p-6 transition-colors hover:border-border-strong hover:bg-surface-raised"
+      className={cn(cardVariants({ tone: "neutral", interactive: true }), "bg-surface/50 group flex flex-col")}
     >
       <span className="text-xs font-semibold uppercase tracking-wide text-teal">{insight.category}</span>
       <h3 className="mt-3 font-display text-lg font-semibold text-foreground">{insight.title}</h3>

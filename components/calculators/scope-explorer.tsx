@@ -10,6 +10,7 @@ import { CheckboxCards } from "@/components/calculators/checkbox-cards"
 import { ProductBlueprint } from "@/components/calculators/product-blueprint"
 import { LeadCaptureForm } from "@/components/forms/lead-capture-form"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import {
   audienceOptions,
   capabilityOptions,
@@ -92,7 +93,7 @@ export function ScopeExplorer() {
 
         <ProductBlueprint modules={modules} />
 
-        <div className="rounded-2xl border border-border bg-surface/40 p-6 sm:p-8">
+        <Card tone="neutral" padding="lg" className="sm:p-8">
           <h3 className="font-display text-lg font-semibold text-foreground">Your platform could include</h3>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {modules.map((module) => (
@@ -116,16 +117,16 @@ export function ScopeExplorer() {
               <dd className="mt-1 text-foreground">{TIMELINE_LABEL[answers.timeline]}</dd>
             </div>
           </dl>
-        </div>
+        </Card>
 
-        <div className="rounded-2xl border border-brand/30 bg-brand/[0.06] p-6 sm:p-8">
+        <Card tone="brand" padding="lg" className="sm:p-8">
           <span className="text-xs font-semibold uppercase tracking-wide text-brand">Recommended starting point</span>
           <h3 className="mt-2 font-display text-xl font-semibold text-foreground">{engagement}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{ENGAGEMENT_DESCRIPTION[engagement]}</p>
           <p className="mt-3 text-xs text-muted-foreground">
             We don&rsquo;t show fixed prices here — final scope and cost always follow a short discovery conversation.
           </p>
-        </div>
+        </Card>
 
         <div className="flex flex-wrap gap-3 print:hidden">
           <Button asChild size="lg">

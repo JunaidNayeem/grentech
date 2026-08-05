@@ -8,6 +8,7 @@ import { ScorePanel } from "@/components/games/score-panel"
 import { WorkflowMap } from "@/components/games/workflow-map"
 import { LeadCaptureForm } from "@/components/forms/lead-capture-form"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { SCORE_LABEL, calculateOverallScore, type ScoreKey } from "@/data/workflow-rescue"
 import { getRescueResultBand } from "@/lib/recommendations"
 import type { GameChoice } from "@/lib/workflow-rescue-reducer"
@@ -56,12 +57,12 @@ export function GameResults({ scores, choices, onRestart }: GameResultsProps) {
         <WorkflowMap overallScore={overall} />
       </div>
 
-      <div className="rounded-2xl border border-brand/30 bg-brand/[0.06] p-6 sm:p-8">
+      <Card tone="brand" padding="lg" className="sm:p-8">
         <span className="text-xs font-semibold uppercase tracking-wide text-brand">Your recommended next step</span>
         <p className="mt-2 font-display text-lg font-semibold text-foreground">{band.recommendation}</p>
-      </div>
+      </Card>
 
-      <div className="rounded-2xl border border-border bg-surface/30 p-6 text-sm text-muted-foreground">
+      <Card tone="neutral" className="bg-surface/30 text-sm text-muted-foreground">
         <h3 className="font-display text-sm font-semibold text-foreground">Score breakdown</h3>
         <ul className="mt-3 space-y-1">
           {(Object.keys(scores) as ScoreKey[]).map((key) => (
@@ -70,7 +71,7 @@ export function GameResults({ scores, choices, onRestart }: GameResultsProps) {
             </li>
           ))}
         </ul>
-      </div>
+      </Card>
 
       <div className="flex flex-wrap gap-3">
         <Button asChild size="lg">

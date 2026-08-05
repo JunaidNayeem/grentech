@@ -5,6 +5,7 @@ import { Check } from "lucide-react"
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { cardVariants } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
 interface Option<T extends string> {
@@ -48,10 +49,9 @@ export function OptionCards<T extends string>({
               key={option.value}
               htmlFor={id}
               className={cn(
-                "flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors",
-                isSelected
-                  ? "border-brand/50 bg-brand/[0.07]"
-                  : "border-border bg-transparent hover:border-border-strong hover:bg-surface/40",
+                cardVariants({ tone: "neutral", padding: "sm", interactive: !isSelected }),
+                "flex cursor-pointer items-start gap-3",
+                isSelected && "border-brand/50 bg-brand/[0.07]",
               )}
             >
               <RadioGroupItem value={option.value} id={id} className="mt-0.5" />

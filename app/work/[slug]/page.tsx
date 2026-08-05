@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowRight, Info } from "lucide-react"
+import { ArrowRight, AlertTriangle } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { PageHeader } from "@/components/sections/page-header"
 import { ChaosToClarity } from "@/components/case-studies/chaos-to-clarity"
 import { WorkflowStages } from "@/components/case-studies/workflow-stages"
@@ -34,13 +36,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     <>
       <PageHeader eyebrow={study.categoryLabel} title={study.title} description={study.description} />
 
-      <section className="border-b border-border bg-amber/[0.06] py-4">
-        <Container className="flex items-start gap-3 text-sm text-amber">
-          <Info className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-          <p>
-            This is an illustrative project example used to demonstrate the kind of work Grentech does. It will be
-            replaced with a real, named case study once explicit public permission is confirmed.
-          </p>
+      <section className="border-b border-border py-6">
+        <Container>
+          <Alert variant="warning">
+            <AlertTriangle className="h-4 w-4" aria-hidden="true" />
+            <AlertDescription>
+              This is an illustrative project example used to demonstrate the kind of work Grentech does. It will be
+              replaced with a real, named case study once explicit public permission is confirmed.
+            </AlertDescription>
+          </Alert>
         </Container>
       </section>
 
@@ -89,8 +93,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <h2 className="font-display text-lg font-semibold text-foreground">Technology</h2>
             <ul className="mt-4 flex flex-wrap gap-2">
               {study.technology.map((item) => (
-                <li key={item} className="rounded-full border border-border px-3 py-1 text-xs font-medium text-foreground">
-                  {item}
+                <li key={item}>
+                  <Badge variant="muted" size="default">
+                    {item}
+                  </Badge>
                 </li>
               ))}
             </ul>

@@ -1,9 +1,12 @@
 import { Check, X } from "lucide-react"
 
+import { Card, cardVariants } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
+
 export function ChaosToClarity({ before, after }: { before: string[]; after: string[] }) {
   return (
     <div className="grid gap-6 sm:grid-cols-2">
-      <div className="rounded-2xl border border-coral/30 bg-coral/[0.05] p-6">
+      <div className={cn(cardVariants({ tone: "neutral" }), "border-coral/30 bg-coral/[0.05]")}>
         <h3 className="font-display text-sm font-semibold text-coral">Before Grentech</h3>
         <ul className="mt-4 space-y-3">
           {before.map((item) => (
@@ -14,7 +17,7 @@ export function ChaosToClarity({ before, after }: { before: string[]; after: str
           ))}
         </ul>
       </div>
-      <div className="rounded-2xl border border-brand/30 bg-brand/[0.05] p-6">
+      <Card tone="brand">
         <h3 className="font-display text-sm font-semibold text-brand">After Grentech</h3>
         <ul className="mt-4 space-y-3">
           {after.map((item) => (
@@ -24,7 +27,7 @@ export function ChaosToClarity({ before, after }: { before: string[]; after: str
             </li>
           ))}
         </ul>
-      </div>
+      </Card>
     </div>
   )
 }

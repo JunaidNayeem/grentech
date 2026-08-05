@@ -4,12 +4,14 @@ import { ArrowRight, Layers } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
+import { Card, cardVariants } from "@/components/ui/card"
 import { PageHeader } from "@/components/sections/page-header"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { TopicVisual } from "@/components/three/topic-visual"
 import { TopicFallback } from "@/components/three/topic-fallback"
 import { ServicesScene } from "@/components/three/scene-loaders"
 import { services, engagementOptions, servicesFaq } from "@/data/services"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Services",
@@ -33,10 +35,12 @@ export default function ServicesPage() {
           {services.map((service) => {
             const Icon = service.icon
             return (
-              <div
+              <Card
                 key={service.slug}
                 id={service.slug}
-                className="scroll-mt-24 grid gap-8 rounded-2xl border border-border bg-surface/40 p-8 sm:p-10 lg:grid-cols-[1fr_1.3fr]"
+                tone="neutral"
+                padding="lg"
+                className="scroll-mt-24 grid gap-8 sm:p-10 lg:grid-cols-[1fr_1.3fr]"
               >
                 <div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
@@ -70,7 +74,7 @@ export default function ServicesPage() {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </Card>
             )
           })}
         </Container>
@@ -84,7 +88,7 @@ export default function ServicesPage() {
           </p>
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {engagementOptions.map((option) => (
-              <div key={option.name} className="rounded-2xl border border-border bg-background/40 p-6">
+              <div key={option.name} className={cn(cardVariants({ tone: "neutral" }), "bg-background/40")}>
                 <h3 className="font-display text-lg font-semibold text-foreground">{option.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{option.summary}</p>
                 <p className="mt-4 text-sm font-medium text-brand">Best when: {option.bestWhen}</p>

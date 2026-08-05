@@ -3,6 +3,7 @@
 import { useId, useState, type FormEvent } from "react"
 
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
@@ -16,7 +17,7 @@ export function NewsletterSignup() {
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-surface/40 p-6">
+    <Card tone="neutral">
       <h2 className="font-display text-lg font-semibold text-foreground">Occasional notes, no spam</h2>
       <p className="mt-2 text-sm text-muted-foreground">
         A short, infrequent note when we publish something worth reading. Optional — unsubscribe any time.
@@ -36,6 +37,6 @@ export function NewsletterSignup() {
           </Button>
         </form>
       )}
-    </div>
+    </Card>
   )
 }

@@ -4,11 +4,13 @@ import { ArrowRight, RefreshCcw } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
+import { cardVariants } from "@/components/ui/card"
 import { PageHeader } from "@/components/sections/page-header"
 import { ProcessTimeline } from "@/components/sections/process-timeline"
 import { TopicVisual } from "@/components/three/topic-visual"
 import { TopicFallback } from "@/components/three/topic-fallback"
 import { HowWeWorkScene } from "@/components/three/scene-loaders"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "How we work",
@@ -65,7 +67,13 @@ export default function HowWeWorkPage() {
           </p>
           <ol className="mt-10 space-y-6">
             {timeline.map((item) => (
-              <li key={item.weeks} className="grid gap-2 rounded-2xl border border-border bg-background/40 p-6 sm:grid-cols-[160px_1fr] sm:items-start">
+              <li
+                key={item.weeks}
+                className={cn(
+                  cardVariants({ tone: "neutral" }),
+                  "bg-background/40 grid gap-2 sm:grid-cols-[160px_1fr] sm:items-start"
+                )}
+              >
                 <span className="font-display text-sm font-semibold text-brand">{item.weeks}</span>
                 <div>
                   <h3 className="font-display text-lg font-semibold text-foreground">{item.title}</h3>
@@ -84,7 +92,10 @@ export default function HowWeWorkPage() {
           </h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {expectations.map((item) => (
-              <li key={item} className="flex gap-3 rounded-xl border border-border bg-surface/40 p-5 text-sm text-foreground">
+              <li
+                key={item}
+                className={cn(cardVariants({ tone: "neutral" }), "rounded-xl p-5 flex gap-3 text-sm text-foreground")}
+              >
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
                 {item}
               </li>

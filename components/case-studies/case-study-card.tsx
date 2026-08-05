@@ -1,13 +1,19 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
+import { Badge } from "@/components/ui/badge"
+import { cardVariants } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 import type { CaseStudy } from "@/data/case-studies"
 
 export function CaseStudyCard({ study }: { study: CaseStudy }) {
   return (
     <Link
       href={`/work/${study.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/50 transition-all hover:-translate-y-1 hover:border-brand/40 hover:bg-surface-raised hover:shadow-[0_0_40px_-12px] hover:shadow-brand/40"
+      className={cn(
+        cardVariants({ tone: "neutral", interactive: true }),
+        "group flex flex-col overflow-hidden bg-surface/50 p-0 transition-all hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_0_40px_-12px] hover:shadow-brand/40"
+      )}
     >
       <div aria-hidden="true" className="relative h-40 overflow-hidden border-b border-border bg-grid p-5">
         <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-teal/10 opacity-0 transition-opacity group-hover:opacity-100" />
@@ -29,17 +35,19 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
         <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-semibold uppercase tracking-wide text-teal">{study.categoryLabel}</span>
           {study.isIllustrative && (
-            <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+            <Badge variant="muted" size="sm">
               Illustrative example
-            </span>
+            </Badge>
           )}
         </div>
         <h3 className="mt-3 font-display text-lg font-semibold text-foreground">{study.title}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{study.description}</p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {study.outcomeLabels.map((label) => (
-            <li key={label} className="rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand">
-              {label}
+            <li key={label}>
+              <Badge variant="brand" size="default">
+                {label}
+              </Badge>
             </li>
           ))}
         </ul>

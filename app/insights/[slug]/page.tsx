@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { InsightCard } from "@/components/sections/insight-card"
 import { getInsightBySlug, getRelatedInsights, insights } from "@/data/insights"
 
@@ -37,7 +38,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
           All insights
         </Link>
 
-        <span className="mt-8 block text-xs font-semibold uppercase tracking-wide text-teal">{insight.category}</span>
+        <Eyebrow className="mt-8 block uppercase text-teal">{insight.category}</Eyebrow>
         <h1 className="mt-3 text-balance font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           {insight.title}
         </h1>

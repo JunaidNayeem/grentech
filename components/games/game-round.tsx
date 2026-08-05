@@ -1,5 +1,6 @@
 import { DecisionCard } from "@/components/games/decision-card"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import type { RescueRound } from "@/data/workflow-rescue"
 
 interface GameRoundProps {
@@ -17,7 +18,7 @@ export function GameRound({ round, totalRounds, phase, lastOptionId, onChoose, o
     const isLastRound = round.index === totalRounds
 
     return (
-      <div className="rounded-2xl border border-brand/30 bg-brand/[0.05] p-6 sm:p-8">
+      <Card tone="brand" padding="lg" className="sm:p-8">
         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Round {round.index} of {totalRounds} · Outcome
         </span>
@@ -33,7 +34,7 @@ export function GameRound({ round, totalRounds, phase, lastOptionId, onChoose, o
             {isLastRound ? "See your results" : "Next decision"}
           </Button>
         </div>
-      </div>
+      </Card>
     )
   }
 

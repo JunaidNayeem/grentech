@@ -2,6 +2,7 @@
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { cardVariants } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
 interface LikertScaleProps {
@@ -17,7 +18,7 @@ const SCALE = [1, 2, 3, 4, 5]
 
 export function LikertScale({ name, question, lowLabel, highLabel, value, onChange }: LikertScaleProps) {
   return (
-    <fieldset className="rounded-2xl border border-border bg-surface/40 p-6">
+    <fieldset className={cn(cardVariants({ tone: "neutral" }))}>
       <legend className="font-display text-base font-semibold text-foreground">{question}</legend>
       <RadioGroup
         value={value?.toString()}
