@@ -4,17 +4,37 @@
 
 @layer base {
   :root {
-    /* Grentech brand tokens — dark-first, single theme */
-    --background: 165 42% 5%;
-    --surface: 160 39% 9%;
-    --surface-raised: 160 34% 12%;
-    --foreground: 140 30% 97%;
-    --muted-foreground: 150 12% 68%;
-    --border: 160 16% 20%;
-    --border-strong: 160 18% 28%;
+    /* Grentech brand tokens — dark-first, single theme.
+       --h/--s are the single canvas hue/saturation source (NDL Sec.2.1); every
+       background/surface/border/ink step below is that same hue at a different
+       lightness, kept at or under the 30% saturation ceiling. */
+    --h: 162;
+    --s: 22%;
+
+    --background: var(--h) var(--s) 5%;
+    --canvas-1: var(--h) var(--s) 7%;
+    --surface: var(--h) var(--s) 9%;
+    --surface-raised: var(--h) var(--s) 12%;
+    --foreground: var(--h) 10% 97%;
+    --muted-foreground: var(--h) 8% 72%;
+    --border: var(--h) var(--s) 20%;
+    --border-strong: var(--h) 20% 28%;
+
+    /* Ink ladder (NDL Sec.2.4) — aliases keep text-foreground/text-muted-foreground
+       working unchanged, plus two new low-saturation meta/decorative steps. */
+    --ink-1: var(--foreground);
+    --ink-2: var(--muted-foreground);
+    --ink-3: var(--h) 8% 52%;
+    --ink-4: var(--h) 8% 38%;
+
+    /* Hairline scale (NDL Sec.2.3) — aliases keep border-border/border-border-strong
+       working unchanged, plus one new step for selected/active states. */
+    --line-1: var(--border);
+    --line-2: var(--border-strong);
+    --line-3: var(--h) 20% 36%;
 
     --brand: 152 74% 58%;
-    --brand-foreground: 165 42% 5%;
+    --brand-foreground: var(--h) var(--s) 5%;
     --accent-lime: 73 90% 68%;
     --teal: 165 37% 41%;
     --amber: 38 90% 65%;
@@ -22,20 +42,35 @@
 
     --card: var(--surface);
     --card-foreground: var(--foreground);
-    --popover: 160 39% 8%;
+    --popover: var(--h) var(--s) 8%;
     --popover-foreground: var(--foreground);
     --primary: var(--brand);
     --primary-foreground: var(--brand-foreground);
-    --secondary: 160 25% 15%;
+    --secondary: var(--h) var(--s) 15%;
     --secondary-foreground: var(--foreground);
-    --muted: 160 25% 13%;
-    --accent: 160 25% 15%;
+    --muted: var(--h) var(--s) 13%;
+    --accent: var(--h) var(--s) 15%;
     --accent-foreground: var(--foreground);
     --destructive: 5 82% 68%;
-    --destructive-foreground: 165 42% 5%;
-    --input: 160 25% 16%;
+    --destructive-foreground: var(--h) var(--s) 5%;
+    --input: var(--h) var(--s) 16%;
     --ring: 152 74% 58%;
     --radius: 0.875rem;
+
+    /* Elevation (NDL Sec.6) — hue-tinted, never the black-shadow default. */
+    --elev-1: inset 0 1px 0 0 hsl(var(--h) 20% 40% / 0.06), 0 1px 2px 0 hsl(var(--h) 30% 2% / 0.4);
+    --elev-2: inset 0 1px 0 0 hsl(var(--h) 20% 40% / 0.07), 0 8px 24px -8px hsl(var(--h) 30% 2% / 0.6);
+    --elev-3: inset 0 1px 0 0 hsl(var(--h) 20% 40% / 0.08), 0 24px 64px -16px hsl(var(--h) 30% 2% / 0.72);
+    --elev-accent: 0 0 0 1px hsl(var(--brand) / 0.4), 0 12px 40px -12px hsl(var(--brand) / 0.35);
+
+    /* Motion (NDL Sec.7) — defined here, consumed as components are touched. */
+    --dur-1: 120ms;
+    --dur-2: 200ms;
+    --dur-3: 320ms;
+    --dur-4: 560ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
 

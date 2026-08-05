@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Plus_Jakarta_Sans, Inter } from "next/font/google"
+import { Plus_Jakarta_Sans, Inter, IBM_Plex_Mono } from "next/font/google"
 
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
@@ -17,6 +17,13 @@ const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
+})
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["400", "500"],
 })
 
 export const metadata: Metadata = {
@@ -46,10 +53,10 @@ const organizationJsonLd = {
   name: SITE.name,
   url: SITE.url,
   email: SITE.email,
-  areaServed: "GB",
+  areaServed: "IN",
   address: {
     "@type": "PostalAddress",
-    addressCountry: "GB",
+    addressCountry: "IN",
   },
   description: SITE.description,
   sameAs: ["https://www.linkedin.com/company/grentech", "https://github.com/grentech", "https://www.instagram.com/grentech"],
@@ -57,7 +64,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <script
           type="application/ld+json"
