@@ -63,7 +63,7 @@ export default function PrivacyPage() {
           <div>
             <h2 className="font-display text-lg font-semibold text-foreground">Contact</h2>
             <p className="mt-3">
-              Grentech is based in the United Kingdom. Questions about this policy can be sent to{" "}
+              Grentech is based in India. Questions about this policy can be sent to{" "}
               <a href={`mailto:${SITE.email}`} className="text-brand hover:underline">
                 {SITE.email}
               </a>

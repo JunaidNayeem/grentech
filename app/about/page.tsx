@@ -11,7 +11,7 @@ import { AboutScene } from "@/components/three/scene-loaders"
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Grentech is a UK-based software product studio building bespoke platforms, SaaS products, and AI-enabled workflows.",
+  description: "Grentech is an India-based software product studio building bespoke platforms, SaaS products, and AI-enabled workflows.",
   alternates: { canonical: "/about" },
 }
 
@@ -44,7 +44,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="ABOUT GRENTECH"
         title="Software built around the way your business works."
-        description="Grentech is a UK-based software product studio. We work with founders, operations leaders, and product teams to turn complex, manual workflows into software that people actually want to use."
+        description="Grentech is an India-based software product studio. We work with founders, operations leaders, and product teams to turn complex, manual workflows into software that people actually want to use."
         visual={<TopicVisual Scene={AboutScene} fallback={<TopicFallback icon={Sparkle} color="brand" />} />}
       />
 

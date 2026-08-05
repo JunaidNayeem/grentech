@@ -4,7 +4,7 @@ export const SITE = {
   domain: "grentech.co.uk",
   url: "https://www.grentech.co.uk",
   email: "hello@grentech.co.uk",
-  location: "United Kingdom",
+  location: "India",
   tagline: "Software built around the way your business works.",
   description:
     "Grentech designs and builds scalable SaaS platforms, internal tools, AI workflows, and bespoke software for ambitious teams.",
