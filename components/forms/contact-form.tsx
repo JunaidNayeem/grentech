@@ -2,14 +2,17 @@
 
 import { useRef, useState } from "react"
 import { useSearchParams } from "next/navigation"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { budgetRanges, contactFormSchema, timelineOptions, type ContactFormValues } from "@/lib/validations"
 import { submitContactForm } from "@/app/contact/actions"
 import { track } from "@/lib/analytics"
@@ -30,6 +33,7 @@ export function ContactForm({ prefillContext }: ContactFormProps) {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     setFocus,
@@ -69,43 +73,44 @@ export function ContactForm({ prefillContext }: ContactFormProps) {
 
   if (status === "success") {
     return (
-      <div role="status" className="rounded-2xl border border-brand/30 bg-brand/[0.06] p-8 text-center">
+      <Card role="status" tone="brand" padding="lg" className="text-center">
         <CheckCircle2 className="mx-auto h-8 w-8 text-brand" aria-hidden="true" />
         <h2 className="mt-4 font-display text-xl font-semibold text-foreground">Thanks — your message is with us.</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{CONTACT_RESPONSE_TIME}</p>
-      </div>
+      </Card>
     )
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit, onInvalid)} noValidate className="space-y-6">
       {errorEntries.length > 0 && (
-        <div
+        <Alert
           ref={errorSummaryRef}
           tabIndex={-1}
-          role="alert"
-          className="rounded-xl border border-coral/40 bg-coral/[0.06] p-4"
+          variant="destructive"
+          className="border-coral/40 bg-coral/[0.06] text-coral [&>svg]:text-coral"
         >
-          <div className="flex items-center gap-2 font-semibold text-coral">
-            <AlertCircle className="h-4 w-4" aria-hidden="true" />
-            Please fix the following before submitting
-          </div>
-          <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-coral">
-            {errorEntries.map(([field, error]) => (
-              <li key={field}>
-                <a href={`#field-${field}`} className="underline underline-offset-2">
-                  {error.message}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+          <AlertCircle className="h-4 w-4" aria-hidden="true" />
+          <AlertDescription>
+            <span className="font-semibold">Please fix the following before submitting</span>
+            <ul className="mt-2 list-inside list-disc space-y-1">
+              {errorEntries.map(([field, error]) => (
+                <li key={field}>
+                  <a href={`#field-${field}`} className="underline underline-offset-2">
+                    {error.message}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </AlertDescription>
+        </Alert>
       )}
 
       {serverError && (
-        <div role="alert" className="rounded-xl border border-coral/40 bg-coral/[0.06] p-4 text-sm text-coral">
-          {serverError}
-        </div>
+        <Alert variant="destructive" className="border-coral/40 bg-coral/[0.06] text-coral [&>svg]:text-coral">
+          <AlertCircle className="h-4 w-4" aria-hidden="true" />
+          <AlertDescription>{serverError}</AlertDescription>
+        </Alert>
       )}
 
       <div className="grid gap-6 sm:grid-cols-2">
@@ -174,23 +179,29 @@ export function ContactForm({ prefillContext }: ContactFormProps) {
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <Label htmlFor="field-budgetRange">Estimated budget range</Label>
-          <select
-            id="field-budgetRange"
-            className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            aria-invalid={!!errors.budgetRange}
-            aria-describedby={errors.budgetRange ? "error-budgetRange" : undefined}
-            defaultValue=""
-            {...register("budgetRange")}
-          >
-            <option value="" disabled>
-              Select a range
-            </option>
-            {budgetRanges.map((range) => (
-              <option key={range} value={range}>
-                {range}
-              </option>
-            ))}
-          </select>
+          <Controller
+            control={control}
+            name="budgetRange"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger
+                  id="field-budgetRange"
+                  className="mt-2"
+                  aria-invalid={!!errors.budgetRange}
+                  aria-describedby={errors.budgetRange ? "error-budgetRange" : undefined}
+                >
+                  <SelectValue placeholder="Select a range" />
+                </SelectTrigger>
+                <SelectContent>
+                  {budgetRanges.map((range) => (
+                    <SelectItem key={range} value={range}>
+                      {range}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
           {errors.budgetRange && (
             <p id="error-budgetRange" className="mt-1.5 text-sm text-coral">
               {errors.budgetRange.message}
@@ -199,23 +210,29 @@ export function ContactForm({ prefillContext }: ContactFormProps) {
         </div>
         <div>
           <Label htmlFor="field-timeline">Project timeline</Label>
-          <select
-            id="field-timeline"
-            className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            aria-invalid={!!errors.timeline}
-            aria-describedby={errors.timeline ? "error-timeline" : undefined}
-            defaultValue=""
-            {...register("timeline")}
-          >
-            <option value="" disabled>
-              Select a timeline
-            </option>
-            {timelineOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+          <Controller
+            control={control}
+            name="timeline"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger
+                  id="field-timeline"
+                  className="mt-2"
+                  aria-invalid={!!errors.timeline}
+                  aria-describedby={errors.timeline ? "error-timeline" : undefined}
+                >
+                  <SelectValue placeholder="Select a timeline" />
+                </SelectTrigger>
+                <SelectContent>
+                  {timelineOptions.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
           {errors.timeline && (
             <p id="error-timeline" className="mt-1.5 text-sm text-coral">
               {errors.timeline.message}
