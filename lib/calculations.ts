@@ -63,8 +63,8 @@ export function clampHours(hours: number): number {
 }
 
 export function clampHourlyCost(cost: number): number {
-  if (Number.isNaN(cost) || cost <= 0) return 25
-  return Math.min(cost, 500)
+  if (Number.isNaN(cost) || cost <= 0) return 1500
+  return Math.min(cost, 25000)
 }
 
 export function calculateWorkflowFriction(inputs: WorkflowCalculatorInputs): WorkflowCalculatorResult {
@@ -88,10 +88,10 @@ export function calculateWorkflowFriction(inputs: WorkflowCalculatorInputs): Wor
   }
 }
 
-export function formatGBP(value: number): string {
-  return new Intl.NumberFormat("en-GB", {
+export function formatINR(value: number): string {
+  return new Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "GBP",
+    currency: "INR",
     maximumFractionDigits: 0,
   }).format(value)
 }

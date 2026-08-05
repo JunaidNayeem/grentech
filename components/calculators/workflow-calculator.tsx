@@ -6,18 +6,20 @@ import dynamic from "next/dynamic"
 import { useSearchParams } from "next/navigation"
 import { ArrowRight, Printer } from "lucide-react"
 
+import { Slider } from "@/components/ui/slider"
 import { StepShell } from "@/components/calculators/step-shell"
 import { OptionCards } from "@/components/calculators/option-cards"
 import { CheckboxCards } from "@/components/calculators/checkbox-cards"
 import { LeadCaptureForm } from "@/components/forms/lead-capture-form"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import {
   calculateWorkflowFriction,
   clampHourlyCost,
   clampHours,
-  formatGBP,
+  formatINR,
   type ErrorFrequency,
   type TeamSizeBand,
 } from "@/lib/calculations"
@@ -57,7 +59,7 @@ interface CalculatorAnswers {
 const initialAnswers: CalculatorAnswers = {
   teamSize: undefined,
   weeklyHours: 5,
-  hourlyCost: 25,
+  hourlyCost: 1500,
   tools: [],
   errorFrequency: undefined,
   focusArea: undefined,
@@ -123,7 +125,7 @@ export function WorkflowCalculator() {
           <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Your results</span>
           <h2 className="mt-2 font-display text-2xl font-semibold text-foreground sm:text-3xl">
             Based on your answers, manual coordination may be costing your team approximately{" "}
-            <span className="text-brand">{formatGBP(result.annualManualCost)}</span> each year.
+            <span className="text-brand">{formatINR(result.annualManualCost)}</span> each year.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Creating one clear workflow could potentially return{" "}
@@ -132,13 +134,13 @@ export function WorkflowCalculator() {
             </strong>{" "}
             of that time to higher-value work — worth roughly{" "}
             <strong className="text-foreground">
-              {formatGBP(result.potentialAnnualValueLow)} to {formatGBP(result.potentialAnnualValueHigh)}
+              {formatINR(result.potentialAnnualValueLow)} to {formatINR(result.potentialAnnualValueHigh)}
             </strong>{" "}
             per year. This reflects {improvementContext}.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-border bg-surface/40 p-6 sm:p-8">
+        <Card tone="neutral" padding="lg" className="sm:p-8">
           <CalculatorChart
             annualManualCost={result.annualManualCost}
             potentialLow={result.potentialAnnualValueLow}
@@ -159,19 +161,19 @@ export function WorkflowCalculator() {
             <tbody>
               <tr className="border-b border-border/60">
                 <td className="py-2 text-foreground">Estimated current annual manual-work cost</td>
-                <td className="py-2 text-foreground">{formatGBP(result.annualManualCost)}</td>
+                <td className="py-2 text-foreground">{formatINR(result.annualManualCost)}</td>
               </tr>
               <tr className="border-b border-border/60">
                 <td className="py-2 text-foreground">Potential opportunity (low estimate)</td>
-                <td className="py-2 text-foreground">{formatGBP(result.potentialAnnualValueLow)}</td>
+                <td className="py-2 text-foreground">{formatINR(result.potentialAnnualValueLow)}</td>
               </tr>
               <tr>
                 <td className="py-2 text-foreground">Potential opportunity (high estimate)</td>
-                <td className="py-2 text-foreground">{formatGBP(result.potentialAnnualValueHigh)}</td>
+                <td className="py-2 text-foreground">{formatINR(result.potentialAnnualValueHigh)}</td>
               </tr>
             </tbody>
           </table>
-        </div>
+        </Card>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-border bg-background/40 p-6">
@@ -183,7 +185,7 @@ export function WorkflowCalculator() {
             <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-muted-foreground">
               <li>{teamSizeOptions.find((o) => o.value === answers.teamSize)?.label} (typical team size)</li>
               <li>{clampHours(answers.weeklyHours)} hours per person per week</li>
-              <li>{formatGBP(clampHourlyCost(answers.hourlyCost))} average hourly cost</li>
+              <li>{formatINR(clampHourlyCost(answers.hourlyCost))} average hourly cost</li>
               <li>48 working weeks per year</li>
             </ul>
           </div>
@@ -260,18 +262,18 @@ export function WorkflowCalculator() {
               How many hours per person per week are spent on repetitive admin or manual coordination?
             </Label>
             <div className="mt-5 flex items-center gap-4">
-              <input
-                id="weekly-hours"
-                type="range"
+              <Slider
+                value={[answers.weeklyHours]}
+                onValueChange={([value]) => setAnswers((a) => ({ ...a, weeklyHours: value }))}
                 min={0}
                 max={20}
                 step={1}
-                value={answers.weeklyHours}
-                onChange={(e) => setAnswers((a) => ({ ...a, weeklyHours: Number(e.target.value) }))}
-                className="h-2 w-full cursor-pointer appearance-none rounded-full bg-surface-raised accent-brand"
+                className="flex-1"
+                aria-label="Weekly hours per person, per week, using a slider"
                 aria-describedby="weekly-hours-value"
               />
               <Input
+                id="weekly-hours"
                 type="number"
                 min={0}
                 max={40}
@@ -295,17 +297,17 @@ export function WorkflowCalculator() {
               What is the approximate average hourly cost of this work?
             </Label>
             <div className="mt-5 flex items-center gap-2">
-              <span className="text-lg text-muted-foreground">£</span>
+              <span className="text-lg text-muted-foreground">₹</span>
               <Input
                 id="hourly-cost"
                 type="number"
                 min={1}
-                max={500}
+                max={25000}
                 value={answers.hourlyCost}
                 onChange={(e) => setAnswers((a) => ({ ...a, hourlyCost: Number(e.target.value) }))}
                 className="w-32"
               />
-              <span className="text-sm text-muted-foreground">per hour (default £25)</span>
+              <span className="text-sm text-muted-foreground">per hour (default ₹1,500)</span>
             </div>
           </div>
         </StepShell>

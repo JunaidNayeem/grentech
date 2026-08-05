@@ -5,7 +5,7 @@ import {
   calculateWorkflowFriction,
   clampHourlyCost,
   clampHours,
-  formatGBP,
+  formatINR,
   WORKING_WEEKS_PER_YEAR,
 } from "./calculations"
 
@@ -62,17 +62,17 @@ describe("calculateWorkflowFriction", () => {
     expect(clampHours(999)).toBe(40)
     expect(clampHours(Number.NaN)).toBe(0)
 
-    expect(clampHourlyCost(0)).toBe(25)
-    expect(clampHourlyCost(-10)).toBe(25)
-    expect(clampHourlyCost(10000)).toBe(500)
-    expect(clampHourlyCost(Number.NaN)).toBe(25)
+    expect(clampHourlyCost(0)).toBe(1500)
+    expect(clampHourlyCost(-10)).toBe(1500)
+    expect(clampHourlyCost(30000)).toBe(25000)
+    expect(clampHourlyCost(Number.NaN)).toBe(1500)
   })
 })
 
-describe("formatGBP", () => {
-  it("formats whole-pound GBP currency", () => {
-    expect(formatGBP(1000)).toBe("£1,000")
-    expect(formatGBP(0)).toBe("£0")
+describe("formatINR", () => {
+  it("formats whole-rupee INR currency", () => {
+    expect(formatINR(1000)).toBe("₹1,000")
+    expect(formatINR(0)).toBe("₹0")
   })
 })
 
