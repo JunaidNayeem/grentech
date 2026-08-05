@@ -31,7 +31,7 @@ export function ScorePanel({ scores }: { scores: Record<ScoreKey, number> }) {
             </div>
             <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-surface-raised">
               <div
-                className={`h-full rounded-full transition-all duration-700 ease-out ${BAR_COLOR[key]}`}
+                className={`h-full rounded-full transition-all duration-4 ease-out ${BAR_COLOR[key]}`}
                 style={{ width: `${scores[key]}%` }}
               />
             </div>
