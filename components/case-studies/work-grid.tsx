@@ -1,10 +1,10 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 import { CaseStudyCard } from "@/components/case-studies/case-study-card"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { CASE_STUDY_CATEGORY_LABEL, type CaseStudy, type CaseStudyCategory } from "@/data/case-studies"
-import { cn } from "@/lib/utils"
 
 const FILTERS: Array<{ value: CaseStudyCategory | "all"; label: string }> = [
   { value: "all", label: "All" },
@@ -22,29 +22,27 @@ export function WorkGrid({ studies }: { studies: CaseStudy[] }) {
     [filter, studies],
   )
 
+  const handleFilterChange = useCallback((value: string) => {
+    if (value) {
+      setFilter(value as CaseStudyCategory | "all")
+    }
+  }, [])
+
   return (
     <div>
-      <div role="group" aria-label="Filter case studies by category" className="flex flex-wrap gap-2">
-        {FILTERS.map((item) => {
-          const isActive = filter === item.value
-          return (
-            <button
-              key={item.value}
-              type="button"
-              aria-pressed={isActive}
-              onClick={() => setFilter(item.value)}
-              className={cn(
-                "rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
-                isActive
-                  ? "border-brand/50 bg-brand/10 text-brand"
-                  : "border-border text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {item.label}
-            </button>
-          )
-        })}
-      </div>
+      <ToggleGroup
+        type="single"
+        value={filter}
+        onValueChange={handleFilterChange}
+        aria-label="Filter case studies by category"
+        className="flex flex-wrap justify-start gap-2"
+      >
+        {FILTERS.map((item) => (
+          <ToggleGroupItem key={item.value} value={item.value} variant="pill">
+            {item.label}
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
 
       <p className="mt-4 text-sm text-muted-foreground" role="status">
         Showing {filtered.length} of {studies.length} illustrative examples.

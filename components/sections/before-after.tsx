@@ -5,10 +5,10 @@ import { AnimatePresence, motion } from "framer-motion"
 import { Check, X } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Reveal } from "@/components/effects/reveal"
 import { GradientBlobs } from "@/components/effects/gradient-blobs"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
-import { cn } from "@/lib/utils"
 
 const BEFORE = [
   "Spreadsheets",
@@ -52,70 +52,25 @@ export function ProblemToProduct() {
         </Reveal>
 
         <Reveal delay={0.1} className="mx-auto mt-12 max-w-xl">
-          <div role="tablist" aria-label="Workflow state" className="flex justify-center gap-2">
-            <button
-              type="button"
-              role="tab"
-              id="tab-before"
-              aria-selected={view === "before"}
-              aria-controls="panel-workflow"
-              onClick={() => setView("before")}
-              className={cn(
-                "rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                view === "before"
-                  ? "border-coral/50 bg-coral/10 text-coral shadow-[0_0_24px_-8px] shadow-coral/60"
-                  : "border-border text-muted-foreground hover:text-foreground",
-              )}
-            >
-              Before Grentech
-            </button>
-            <button
-              type="button"
-              role="tab"
-              id="tab-after"
-              aria-selected={view === "after"}
-              aria-controls="panel-workflow"
-              onClick={() => setView("after")}
-              className={cn(
-                "rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                view === "after"
-                  ? "border-brand/50 bg-brand/10 text-brand shadow-[0_0_24px_-8px] shadow-brand/60"
-                  : "border-border text-muted-foreground hover:text-foreground",
-              )}
-            >
-              After Grentech
-            </button>
-          </div>
+          <Tabs value={view} onValueChange={(value) => setView(value as "before" | "after")}>
+            <TabsList aria-label="Workflow state" className="justify-center">
+              <TabsTrigger
+                value="before"
+                className="px-5 transition-all data-[state=active]:border-coral/50 data-[state=active]:bg-coral/10 data-[state=active]:text-coral data-[state=active]:shadow-[0_0_24px_-8px] data-[state=active]:shadow-coral/60"
+              >
+                Before Grentech
+              </TabsTrigger>
+              <TabsTrigger
+                value="after"
+                className="px-5 transition-all data-[state=active]:shadow-[0_0_24px_-8px] data-[state=active]:shadow-brand/60"
+              >
+                After Grentech
+              </TabsTrigger>
+            </TabsList>
 
-          <div
-            id="panel-workflow"
-            role="tabpanel"
-            aria-labelledby={view === "before" ? "tab-before" : "tab-after"}
-            className="glass-panel relative mt-8 overflow-hidden rounded-2xl p-8"
-          >
-            {reducedMotion ? (
-              <ul className="grid gap-3 sm:grid-cols-2">
-                {items.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-foreground">
-                    {view === "before" ? (
-                      <X className="h-4 w-4 shrink-0 text-coral" aria-hidden="true" />
-                    ) : (
-                      <Check className="h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
-                    )}
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <AnimatePresence mode="wait">
-                <motion.ul
-                  key={view}
-                  initial={{ opacity: 0, x: view === "before" ? -16 : 16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: view === "before" ? 16 : -16 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="grid gap-3 sm:grid-cols-2"
-                >
+            <TabsContent value={view} className="glass-panel relative mt-8 overflow-hidden rounded-2xl p-8">
+              {reducedMotion ? (
+                <ul className="grid gap-3 sm:grid-cols-2">
                   {items.map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm text-foreground">
                       {view === "before" ? (
@@ -126,10 +81,32 @@ export function ProblemToProduct() {
                       {item}
                     </li>
                   ))}
-                </motion.ul>
-              </AnimatePresence>
-            )}
-          </div>
+                </ul>
+              ) : (
+                <AnimatePresence mode="wait">
+                  <motion.ul
+                    key={view}
+                    initial={{ opacity: 0, x: view === "before" ? -16 : 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: view === "before" ? 16 : -16 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="grid gap-3 sm:grid-cols-2"
+                  >
+                    {items.map((item) => (
+                      <li key={item} className="flex items-center gap-3 text-sm text-foreground">
+                        {view === "before" ? (
+                          <X className="h-4 w-4 shrink-0 text-coral" aria-hidden="true" />
+                        ) : (
+                          <Check className="h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+                        )}
+                        {item}
+                      </li>
+                    ))}
+                  </motion.ul>
+                </AnimatePresence>
+              )}
+            </TabsContent>
+          </Tabs>
         </Reveal>
 
         <div className="mx-auto mt-8 max-w-xl rounded-xl border border-border bg-surface/40 p-6 text-sm text-muted-foreground">
