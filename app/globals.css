@@ -12,9 +12,9 @@
     --s: 22%;
 
     --background: var(--h) var(--s) 5%;
-    --canvas-1: var(--h) var(--s) 7%;
-    --surface: var(--h) var(--s) 9%;
-    --surface-raised: var(--h) var(--s) 12%;
+    --canvas-1: var(--h) var(--s) 8%;
+    --surface: var(--h) var(--s) 12%;
+    --surface-raised: var(--h) var(--s) 17%;
     --foreground: var(--h) 10% 97%;
     --muted-foreground: var(--h) 8% 72%;
     --border: var(--h) var(--s) 20%;
@@ -42,18 +42,18 @@
 
     --card: var(--surface);
     --card-foreground: var(--foreground);
-    --popover: var(--h) var(--s) 8%;
+    --popover: var(--h) var(--s) 10%;
     --popover-foreground: var(--foreground);
     --primary: var(--brand);
     --primary-foreground: var(--brand-foreground);
-    --secondary: var(--h) var(--s) 15%;
+    --secondary: var(--h) var(--s) 18%;
     --secondary-foreground: var(--foreground);
-    --muted: var(--h) var(--s) 13%;
-    --accent: var(--h) var(--s) 15%;
+    --muted: var(--h) var(--s) 15%;
+    --accent: var(--h) var(--s) 18%;
     --accent-foreground: var(--foreground);
     --destructive: 5 82% 68%;
     --destructive-foreground: var(--h) var(--s) 5%;
-    --input: var(--h) var(--s) 16%;
+    --input: var(--h) var(--s) 20%;
     --ring: 152 74% 58%;
     --radius: 0.875rem;
 

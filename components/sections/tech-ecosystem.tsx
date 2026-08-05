@@ -35,7 +35,7 @@ export function TechEcosystem() {
           items={technologies.map((tech) => (
             <span
               key={tech}
-              className="whitespace-nowrap rounded-full border border-border bg-surface/50 px-5 py-2.5 text-sm font-medium text-foreground"
+              className="whitespace-nowrap rounded-full border border-border bg-surface-raised px-5 py-2.5 text-sm font-medium text-foreground"
             >
               {tech}
             </span>
