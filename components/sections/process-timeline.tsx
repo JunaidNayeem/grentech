@@ -4,6 +4,7 @@ import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
 import { Container } from "@/components/ui/container"
+import { Section } from "@/components/ui/section"
 import { Reveal } from "@/components/effects/reveal"
 import { processSteps } from "@/data/how-we-work"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
@@ -15,7 +16,7 @@ export function ProcessTimeline() {
   const active = processSteps[activeIndex]
 
   return (
-    <section className="py-20 sm:py-28">
+    <Section density="marketing">
       <Container>
         <Reveal>
           <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
@@ -97,6 +98,6 @@ export function ProcessTimeline() {
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

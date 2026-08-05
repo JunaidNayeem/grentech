@@ -2,13 +2,14 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
+import { Section } from "@/components/ui/section"
 import { InsightCard } from "@/components/sections/insight-card"
 import { Reveal } from "@/components/effects/reveal"
 import { insights } from "@/data/insights"
 
 export function InsightsPreview() {
   return (
-    <section className="border-t border-border bg-surface/30 py-20 sm:py-28">
+    <Section density="marketing" className="border-t border-border bg-surface/30">
       <Container>
         <Reveal>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -33,6 +34,6 @@ export function InsightsPreview() {
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { Check, X } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
+import { Section } from "@/components/ui/section"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Reveal } from "@/components/effects/reveal"
 import { GradientBlobs } from "@/components/effects/gradient-blobs"
@@ -34,7 +35,7 @@ export function ProblemToProduct() {
   const items = view === "before" ? BEFORE : AFTER
 
   return (
-    <section className="relative py-20 sm:py-28">
+    <Section density="marketing" className="relative">
       <GradientBlobs variant="cta" className="opacity-60" />
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
@@ -131,6 +132,6 @@ export function ProblemToProduct() {
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

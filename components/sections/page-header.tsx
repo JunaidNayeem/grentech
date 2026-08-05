@@ -2,6 +2,7 @@ import type React from "react"
 
 import { Container } from "@/components/ui/container"
 import { Eyebrow } from "@/components/ui/eyebrow"
+import { Section } from "@/components/ui/section"
 import { Reveal } from "@/components/effects/reveal"
 
 interface PageHeaderProps {
@@ -15,7 +16,7 @@ interface PageHeaderProps {
 
 export function PageHeader({ eyebrow, title, description, children, visual }: PageHeaderProps) {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-grid py-16 sm:py-20">
+    <Section density="utility" className="relative overflow-hidden border-b border-border bg-grid">
       <Container className={visual ? "grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]" : undefined}>
         <Reveal className="max-w-2xl">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
@@ -27,6 +28,6 @@ export function PageHeader({ eyebrow, title, description, children, visual }: Pa
         </Reveal>
         {visual && <div className="hidden lg:block">{visual}</div>}
       </Container>
-    </section>
+    </Section>
   )
 }

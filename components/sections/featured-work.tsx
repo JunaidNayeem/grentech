@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
+import { Section } from "@/components/ui/section"
 import { CaseStudyCard } from "@/components/case-studies/case-study-card"
 import { Reveal } from "@/components/effects/reveal"
 import { TiltCard } from "@/components/effects/tilt-card"
@@ -9,7 +10,7 @@ import { caseStudies } from "@/data/case-studies"
 
 export function FeaturedWork() {
   return (
-    <section className="relative border-t border-border bg-surface/30 py-20 sm:py-28">
+    <Section density="marketing" className="relative border-t border-border bg-surface/30">
       <Reveal>
         <Container>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -44,6 +45,6 @@ export function FeaturedWork() {
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

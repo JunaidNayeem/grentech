@@ -1,6 +1,7 @@
 import { Target, ShieldCheck, MessagesSquare, Accessibility } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
+import { Section } from "@/components/ui/section"
 import { Reveal } from "@/components/effects/reveal"
 import { TiltCard } from "@/components/effects/tilt-card"
 
@@ -29,7 +30,7 @@ const values = [
 
 export function WhyGrentech() {
   return (
-    <section className="border-t border-border bg-surface/30 py-20 sm:py-28">
+    <Section density="marketing" className="border-t border-border bg-surface/30">
       <Container>
         <Reveal>
           <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
@@ -60,6 +61,6 @@ export function WhyGrentech() {
           </p>
         </Reveal>
       </Container>
-    </section>
+    </Section>
   )
 }

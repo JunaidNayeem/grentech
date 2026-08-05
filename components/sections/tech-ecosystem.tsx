@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/container"
+import { Section } from "@/components/ui/section"
 import { Reveal } from "@/components/effects/reveal"
 import { Marquee } from "@/components/effects/marquee"
 
@@ -17,7 +18,7 @@ const technologies = [
 
 export function TechEcosystem() {
   return (
-    <section className="overflow-hidden py-20 sm:py-28">
+    <Section density="marketing" className="overflow-hidden">
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
@@ -41,6 +42,6 @@ export function TechEcosystem() {
           ))}
         />
       </div>
-    </section>
+    </Section>
   )
 }

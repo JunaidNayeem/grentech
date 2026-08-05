@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
+import { Section } from "@/components/ui/section"
 import { Reveal } from "@/components/effects/reveal"
 import { TiltCard } from "@/components/effects/tilt-card"
 import { services } from "@/data/services"
@@ -9,7 +10,7 @@ import { cn } from "@/lib/utils"
 
 export function ServicesGrid() {
   return (
-    <section className="py-20 sm:py-28">
+    <Section density="marketing">
       <Container>
         <Reveal>
           <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
@@ -35,7 +36,7 @@ export function ServicesGrid() {
                     href={`/services#${service.slug}`}
                     className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:underline"
                   >
-                    Learn more
+                    See how it works
                     <ArrowUpRight
                       className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       aria-hidden="true"
@@ -47,6 +48,6 @@ export function ServicesGrid() {
           })}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }
