@@ -8,8 +8,8 @@
        --h/--s are the single canvas hue/saturation source (NDL Sec.2.1); every
        background/surface/border/ink step below is that same hue at a different
        lightness, kept at or under the 30% saturation ceiling. */
-    --h: 162;
-    --s: 22%;
+    --h: 240;
+    --s: 3%;
 
     --background: var(--h) var(--s) 5%;
     --canvas-1: var(--h) var(--s) 8%;
@@ -18,7 +18,7 @@
     --foreground: var(--h) 10% 97%;
     --muted-foreground: var(--h) 8% 72%;
     --border: var(--h) var(--s) 20%;
-    --border-strong: var(--h) 20% 28%;
+    --border-strong: var(--h) var(--s) 28%;
 
     /* Ink ladder (NDL Sec.2.4) — aliases keep text-foreground/text-muted-foreground
        working unchanged, plus two new low-saturation meta/decorative steps. */
@@ -31,7 +31,7 @@
        working unchanged, plus one new step for selected/active states. */
     --line-1: var(--border);
     --line-2: var(--border-strong);
-    --line-3: var(--h) 20% 36%;
+    --line-3: var(--h) var(--s) 36%;
 
     --brand: 152 74% 58%;
     --brand-foreground: var(--h) var(--s) 5%;
@@ -101,9 +101,6 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-image: radial-gradient(ellipse 80% 60% at 50% -10%, hsl(152 74% 20% / 0.35), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 0%, hsl(165 37% 25% / 0.2), transparent);
-    background-attachment: fixed;
   }
 
   ::selection {

@@ -6,31 +6,19 @@ interface GradientBlobsProps {
 }
 
 /**
- * Purely decorative animated gradient-mesh blobs. `aria-hidden` and frozen
- * automatically under `prefers-reduced-motion` via the global CSS rule.
+ * NDL's ambient glow: one large, very-low-opacity radial gradient behind a
+ * hero/CTA moment - an atmospheric device, not a decorative texture. Tied to
+ * --brand so it stays in sync with the product accent.
  */
 export function GradientBlobs({ className, variant = "hero" }: GradientBlobsProps) {
   return (
     <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0 -z-10 overflow-hidden", className)}>
       <div
-        className="animate-blob-1 absolute -left-24 -top-24 h-[28rem] w-[28rem] rounded-full opacity-40 blur-3xl"
-        style={{
-          background:
-            variant === "hero"
-              ? "radial-gradient(circle, #36E39A 0%, transparent 70%)"
-              : "radial-gradient(circle, #B8F55A 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="animate-blob-2 absolute -right-32 top-1/3 h-[24rem] w-[24rem] rounded-full opacity-30 blur-3xl"
-        style={{ background: "radial-gradient(circle, #3E8D78 0%, transparent 70%)" }}
-      />
-      <div
-        className="animate-blob-1 absolute bottom-0 left-1/3 h-[20rem] w-[20rem] rounded-full opacity-20 blur-3xl"
-        style={{
-          background: "radial-gradient(circle, #B8F55A 0%, transparent 70%)",
-          animationDelay: "4s",
-        }}
+        className={cn(
+          "absolute h-[32rem] w-[32rem] rounded-full opacity-10 blur-3xl",
+          variant === "hero" ? "-left-24 -top-24 animate-blob-1" : "left-1/2 top-1/3 -translate-x-1/2 animate-blob-2",
+        )}
+        style={{ background: "radial-gradient(circle, hsl(var(--brand)) 0%, transparent 70%)" }}
       />
     </div>
   )

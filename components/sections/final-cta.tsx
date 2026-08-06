@@ -10,10 +10,6 @@ import { GradientBlobs } from "@/components/effects/gradient-blobs"
 export function FinalCta() {
   return (
     <Section density="marketing" className="relative overflow-hidden border-t border-border">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_100%,hsl(152_74%_25%/0.45),transparent)]"
-      />
       <GradientBlobs variant="cta" />
       <Container className="relative text-center">
         <Reveal>
