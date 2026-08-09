@@ -62,9 +62,14 @@ export function clampHours(hours: number): number {
   return Math.min(Math.max(hours, 0), 40)
 }
 
+/** Blended hourly cost of the people doing the manual work, in USD. */
+export const DEFAULT_HOURLY_COST = 50
+/** Upper bound, generous enough for senior/specialist time without letting a typo run away. */
+export const MAX_HOURLY_COST = 500
+
 export function clampHourlyCost(cost: number): number {
-  if (Number.isNaN(cost) || cost <= 0) return 1500
-  return Math.min(cost, 25000)
+  if (Number.isNaN(cost) || cost <= 0) return DEFAULT_HOURLY_COST
+  return Math.min(cost, MAX_HOURLY_COST)
 }
 
 export function calculateWorkflowFriction(inputs: WorkflowCalculatorInputs): WorkflowCalculatorResult {
@@ -88,10 +93,10 @@ export function calculateWorkflowFriction(inputs: WorkflowCalculatorInputs): Wor
   }
 }
 
-export function formatINR(value: number): string {
-  return new Intl.NumberFormat("en-IN", {
+export function formatUSD(value: number): string {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "INR",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(value)
 }

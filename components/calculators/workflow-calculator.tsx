@@ -16,10 +16,12 @@ import { Card } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import {
+  DEFAULT_HOURLY_COST,
+  MAX_HOURLY_COST,
   calculateWorkflowFriction,
   clampHourlyCost,
   clampHours,
-  formatINR,
+  formatUSD,
   type ErrorFrequency,
   type TeamSizeBand,
 } from "@/lib/calculations"
@@ -59,7 +61,7 @@ interface CalculatorAnswers {
 const initialAnswers: CalculatorAnswers = {
   teamSize: undefined,
   weeklyHours: 5,
-  hourlyCost: 1500,
+  hourlyCost: DEFAULT_HOURLY_COST,
   tools: [],
   errorFrequency: undefined,
   focusArea: undefined,
@@ -125,7 +127,7 @@ export function WorkflowCalculator() {
           <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Your results</span>
           <h2 className="mt-2 font-display text-2xl font-semibold text-foreground sm:text-3xl">
             Based on your answers, manual coordination may be costing your team approximately{" "}
-            <span className="text-brand">{formatINR(result.annualManualCost)}</span> each year.
+            <span className="text-brand">{formatUSD(result.annualManualCost)}</span> each year.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Creating one clear workflow could potentially return{" "}
@@ -134,7 +136,7 @@ export function WorkflowCalculator() {
             </strong>{" "}
             of that time to higher-value work — worth roughly{" "}
             <strong className="text-foreground">
-              {formatINR(result.potentialAnnualValueLow)} to {formatINR(result.potentialAnnualValueHigh)}
+              {formatUSD(result.potentialAnnualValueLow)} to {formatUSD(result.potentialAnnualValueHigh)}
             </strong>{" "}
             per year. This reflects {improvementContext}.
           </p>
@@ -161,15 +163,15 @@ export function WorkflowCalculator() {
             <tbody>
               <tr className="border-b border-border/60">
                 <td className="py-2 text-foreground">Estimated current annual manual-work cost</td>
-                <td className="py-2 text-foreground">{formatINR(result.annualManualCost)}</td>
+                <td className="py-2 text-foreground">{formatUSD(result.annualManualCost)}</td>
               </tr>
               <tr className="border-b border-border/60">
                 <td className="py-2 text-foreground">Potential opportunity (low estimate)</td>
-                <td className="py-2 text-foreground">{formatINR(result.potentialAnnualValueLow)}</td>
+                <td className="py-2 text-foreground">{formatUSD(result.potentialAnnualValueLow)}</td>
               </tr>
               <tr>
                 <td className="py-2 text-foreground">Potential opportunity (high estimate)</td>
-                <td className="py-2 text-foreground">{formatINR(result.potentialAnnualValueHigh)}</td>
+                <td className="py-2 text-foreground">{formatUSD(result.potentialAnnualValueHigh)}</td>
               </tr>
             </tbody>
           </table>
@@ -185,7 +187,7 @@ export function WorkflowCalculator() {
             <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-muted-foreground">
               <li>{teamSizeOptions.find((o) => o.value === answers.teamSize)?.label} (typical team size)</li>
               <li>{clampHours(answers.weeklyHours)} hours per person per week</li>
-              <li>{formatINR(clampHourlyCost(answers.hourlyCost))} average hourly cost</li>
+              <li>{formatUSD(clampHourlyCost(answers.hourlyCost))} average hourly cost</li>
               <li>48 working weeks per year</li>
             </ul>
           </div>
@@ -297,17 +299,19 @@ export function WorkflowCalculator() {
               What is the approximate average hourly cost of this work?
             </Label>
             <div className="mt-5 flex items-center gap-2">
-              <span className="text-lg text-muted-foreground">₹</span>
+              <span className="text-lg text-muted-foreground">$</span>
               <Input
                 id="hourly-cost"
                 type="number"
                 min={1}
-                max={25000}
+                max={MAX_HOURLY_COST}
                 value={answers.hourlyCost}
                 onChange={(e) => setAnswers((a) => ({ ...a, hourlyCost: Number(e.target.value) }))}
                 className="w-32"
               />
-              <span className="text-sm text-muted-foreground">per hour (default ₹1,500)</span>
+              <span className="text-sm text-muted-foreground">
+                per hour (default {formatUSD(DEFAULT_HOURLY_COST)})
+              </span>
             </div>
           </div>
         </StepShell>

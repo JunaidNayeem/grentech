@@ -13,7 +13,8 @@ export function Hero() {
     <section className="relative overflow-hidden bg-grid">
       <CustomCursor />
       <GradientBlobs variant="hero" />
-      <Container className="grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-2 lg:py-32">
+      <WebGLHero />
+      <Container className="relative z-10 grid items-center gap-12 py-20 sm:py-24 lg:min-h-[38rem] lg:grid-cols-2 lg:py-32">
         <div>
           <Badge variant="brand" size="lg" className="border border-brand/30 gap-2">
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
@@ -47,8 +48,6 @@ export function Hero() {
             From first idea to launch, scale, and continuous improvement.
           </p>
         </div>
-
-        <WebGLHero />
       </Container>
     </section>
   )

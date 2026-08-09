@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  DEFAULT_HOURLY_COST,
+  MAX_HOURLY_COST,
   calculateMaturityScore,
   calculateWorkflowFriction,
   clampHourlyCost,
   clampHours,
-  formatINR,
+  formatUSD,
   WORKING_WEEKS_PER_YEAR,
 } from "./calculations"
 
@@ -62,17 +64,18 @@ describe("calculateWorkflowFriction", () => {
     expect(clampHours(999)).toBe(40)
     expect(clampHours(Number.NaN)).toBe(0)
 
-    expect(clampHourlyCost(0)).toBe(1500)
-    expect(clampHourlyCost(-10)).toBe(1500)
-    expect(clampHourlyCost(30000)).toBe(25000)
-    expect(clampHourlyCost(Number.NaN)).toBe(1500)
+    expect(clampHourlyCost(0)).toBe(DEFAULT_HOURLY_COST)
+    expect(clampHourlyCost(-10)).toBe(DEFAULT_HOURLY_COST)
+    expect(clampHourlyCost(MAX_HOURLY_COST + 5000)).toBe(MAX_HOURLY_COST)
+    expect(clampHourlyCost(Number.NaN)).toBe(DEFAULT_HOURLY_COST)
   })
 })
 
-describe("formatINR", () => {
-  it("formats whole-rupee INR currency", () => {
-    expect(formatINR(1000)).toBe("₹1,000")
-    expect(formatINR(0)).toBe("₹0")
+describe("formatUSD", () => {
+  it("formats whole-dollar USD currency", () => {
+    expect(formatUSD(1000)).toBe("$1,000")
+    expect(formatUSD(0)).toBe("$0")
+    expect(formatUSD(1234567)).toBe("$1,234,567")
   })
 })
 
